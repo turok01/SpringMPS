@@ -1,0 +1,22 @@
+
+<p>subst-list works!</p>
+<h2>Список подстанций</h2>
+
+<table border="1">
+  <thead></thead>
+  <tr>
+    <th>Название</th>
+    <th>IP-адрес</th>
+    <th>Принадлежность</th>
+    <th>User</th>
+  </tr>
+  <tbody>
+  <tr *ngFor="let subst of substs">
+    <td>{{subst.nameSubst}}</td>
+    <td>{{subst.ip}}</td>
+    <td>{{subst.zone}}</td>
+    <td>{{subst.user?.username}}</td>
+
+  </tr>
+  </tbody>
+</table>

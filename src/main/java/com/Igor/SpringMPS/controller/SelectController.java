@@ -7,6 +7,10 @@ import com.Igor.SpringMPS.data.TransformerRepository;
 import com.Igor.SpringMPS.entities.TransformerSubst;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,19 +19,26 @@ import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
 @RequestMapping("/select")
 //@SessionAttributes(types = TransformerSubst.class)
 @SessionAttributes(value = "currentSubst")
+@ConfigurationProperties(prefix="mps.substations")
 public class SelectController {
-    //private AttributedString model;
 
+    private int pageSize = 10;
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
 
     @ModelAttribute("currentSubst")
     public TransformerSubst createSubst(){
@@ -41,13 +52,35 @@ public class SelectController {
     }
 
     @GetMapping
-    public String showSelectForm(@ModelAttribute("currentSubst") TransformerSubst tp, Model model){
+    public String showSelectForm(@ModelAttribute("currentSubst") TransformerSubst tp, Model model,
+                                 @RequestParam("pageNumber") Optional<Integer> pageNumber ){
+
+        int currentPage = pageNumber.orElse(0);
+
         List<TransformerSubst> substs = new ArrayList<>();
-        transformerRepo.findAll().forEach(i->substs.add(i));
-        Integer i = 0;
+        Pageable pageable =  PageRequest.of(currentPage, pageSize);
+        Page<TransformerSubst> page = null;
+        page = transformerRepo.findAll(pageable);
+        substs = page.getContent();
+        //transformerRepo.findAll().forEach(i->substs.add(i));
         model.addAttribute("listsubst",substs);
 
-        model.addAttribute("intSubst", i);
+        int prevPage = 0;
+        int nextPage = 0;
+        int totalPages = page.getTotalPages();
+        if (currentPage > 0)
+            prevPage = currentPage - 1;
+        if (totalPages - 1 > currentPage)
+            nextPage = currentPage + 1;
+        else
+            nextPage = currentPage;
+        model.addAttribute("prevpage", prevPage);
+        model.addAttribute("nextpage", nextPage);
+        model.addAttribute("currentpage", currentPage + 1);
+        model.addAttribute("totalpages",totalPages);
+
+        long totalSubst = page.getTotalElements();
+        model.addAttribute("totalSubst",totalSubst);
 
         //model.addAttribute("select",new BaseTransformerSubst());
         return "select";

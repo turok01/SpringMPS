@@ -12,6 +12,18 @@
 </form>
 
 <h1>MPS список подстанций:</h1>
+<span>Всего найдено объектов: </span>
+<span th:text="${totalSubst}"></span>
+<form method="GET" th:action="@{/select}">
+<div>
+    <button type="submit" name = "pageNumber" th:value="${prevpage}"> Пред </button>
+    <button type="submit" name = "pageNumber" th:value="${nextpage}" > След </button>
+    <span>Показана страница </span>
+    <span th:text="${currentpage}"></span>
+    <span> из </span>
+    <span  th:text="${totalpages}" ></span>
+</div>
+</form>
 <label> Название|IP-адрес|Зона обслуживания</label>
 <!--<form method="POST" th:action="@{/select}" th:object="${transformerSubst}">-->
 <!--<form method="POST" th:action="@{/select}" th:object="${currentSubst}">-->

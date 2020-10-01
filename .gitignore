@@ -13,6 +13,12 @@ target/
 .springBeans
 .sts4-cache
 
+### Log ####
+.log
+
+###Slf4j Log####
+.gz
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
@@ -30,6 +36,9 @@ build/
 ### VS Code ###
 .vscode/
 
-### LogFiles ###
-*.gz
-*.log
+# Angular dependencies
+/MPS-ui/node_modules
+
+# e2e
+/MPS-ui/e2e/*.js
+/MPS-ui/e2e/*.map

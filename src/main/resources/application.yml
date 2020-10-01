@@ -9,9 +9,13 @@ server:
 logging:
   level:
       root: WARN
-      org.springframework.security: DEBUG
+      org.springframework.security: WARN
   file:
     name: MPS.log
     path: /logs/
+
+mps:
+  substations:
+    pageSize: 5
 
 
