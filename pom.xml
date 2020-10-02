@@ -19,8 +19,6 @@
 	</properties>
 	<packaging>war</packaging>
 
-	<packaging>war</packaging>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
