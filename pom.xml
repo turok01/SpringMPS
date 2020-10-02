@@ -78,6 +78,7 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -139,7 +140,7 @@
 	<repositories>
 		<repository>
 			<id>mvn-repo</id>
-			<name>mvn repo</name>
+			<name>mvn reposit</name>
 			<url>https://mvnrepository.com</url>
 		</repository>
 		<repository>
