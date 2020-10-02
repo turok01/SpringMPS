@@ -72,6 +72,12 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+		<!-- repo: https://mvnrepository.com -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -131,6 +137,11 @@
 	</build>
 
 	<repositories>
+		<repository>
+			<id>mvn-repo</id>
+			<name>mvn repo</name>
+			<url>https://mvnrepository.com</url>
+		</repository>
 		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
